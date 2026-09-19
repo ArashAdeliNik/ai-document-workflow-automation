@@ -1,0 +1,27 @@
+services:
+  api:
+    build: .
+    environment:
+      DATABASE_URL: sqlite:////app/data/documents.db
+      REVIEW_THRESHOLD: ${REVIEW_THRESHOLD:-0.78}
+    volumes:
+      - document_data:/app/data
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  dashboard:
+    build: .
+    command: streamlit run app/dashboard.py --server.address=0.0.0.0 --server.port=8501
+    depends_on:
+      api:
+        condition: service_healthy
+    ports:
+      - "8501:8501"
+
+volumes:
+  document_data:

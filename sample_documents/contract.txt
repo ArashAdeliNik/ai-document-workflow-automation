@@ -1,0 +1,8 @@
+SERVICE AGREEMENT
+Contract Number: CTR-2026-084
+Effective Date: 2026-10-01
+Party A: Atlas Manufacturing Group
+Party B: Arash Data Automation Studio
+End Date: 2027-09-30
+
+The second party will deliver document-processing and workflow automation services.
